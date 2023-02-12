@@ -1,13 +1,14 @@
 import React from 'react';
-import css from '../Styled/Styles.module.css';
+
+import { ModalBox, Overlay } from './Modal.styled';
 
 const Modal = ({ imageInfo: { largeImageURL, tags }, onClose }) => {
   return (
-    <div onClick={onClose} className={css.Overlay}>
-      <div className={css.Modal}>
+    <Overlay onClick={onClose}>
+      <ModalBox>
         <img src={largeImageURL} alt={tags} />
-      </div>
-    </div>
+      </ModalBox>
+    </Overlay>
   );
 };
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Loader from 'components/Loader';
-import css from '../Styled/Styles.module.css';
+import { ButtonLoad } from './Button.styled';
 
 const Button = ({ loadMore, isLoading }) => {
   return (
@@ -9,9 +9,9 @@ const Button = ({ loadMore, isLoading }) => {
       {isLoading ? (
         <Loader />
       ) : (
-        <button className={css.Button} type="button" onClick={loadMore}>
+        <ButtonLoad type="button" onClick={loadMore}>
           Load more
-        </button>
+        </ButtonLoad>
       )}
     </>
   );

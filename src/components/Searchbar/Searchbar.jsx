@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import css from '../Styled/Styles.module.css';
+import { Header, Form, FormButton, FormInput, Span } from './Searchbar.styled';
 import { CiSearch } from 'react-icons/ci';
 import { toast } from 'react-toastify';
 
@@ -26,15 +26,14 @@ export default class Searchbar extends Component {
   render() {
     const { searchText } = this.state;
     return (
-      <header className={css.Searchbar}>
-        <form onSubmit={this.handleSubmit} className={css.SearchForm}>
-          <button type="submit" className={css.SearchForm__button}>
+      <Header>
+        <Form onSubmit={this.handleSubmit}>
+          <FormButton type="submit">
             <CiSearch size="2em" />
-            <span className={css.SearchForm__button_label}>Search</span>
-          </button>
+            <Span>Search</Span>
+          </FormButton>
 
-          <input
-            className={css.SearchForm_input}
+          <FormInput
             type="text"
             autoComplete="off"
             autoFocus
@@ -42,8 +41,8 @@ export default class Searchbar extends Component {
             value={searchText}
             onChange={this.handleChange}
           />
-        </form>
-      </header>
+        </Form>
+      </Header>
     );
   }
 }

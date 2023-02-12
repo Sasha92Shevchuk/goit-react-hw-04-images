@@ -6,7 +6,7 @@ import ImageGallery from './ImageGallery';
 import * as instanceAPI from 'services/api';
 import Button from 'components/Button';
 import Loader from 'components/Loader';
-import css from './Styled/Styles.module.css';
+import { Box } from './App.styled';
 
 export class App extends Component {
   state = {
@@ -80,7 +80,7 @@ export class App extends Component {
   render() {
     const { searchCards, isVisible, isLoading, error } = this.state;
     return (
-      <div className={css.App}>
+      <Box>
         <Searchbar onSubmit={this.onFormSubmit} />
         <ToastContainer autoClose={3000} />
         {error && <h1>{error.message}</h1>}
@@ -93,7 +93,7 @@ export class App extends Component {
             disabled={isLoading}
           />
         )}
-      </div>
+      </Box>
     );
   }
 }
