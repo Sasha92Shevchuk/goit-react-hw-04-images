@@ -22,6 +22,10 @@ export class App extends Component {
     const prevSearch = prevState.searchQuery;
     const nextSearch = this.state.searchQuery;
     const page = this.state.page;
+    // if (prevSearch === nextSearch) {
+    //   toast.warning('Please, enter new search query and try again.');
+    //   return;
+    // }
 
     if (prevSearch !== nextSearch || prevState.page !== page) {
       this.setState({ isLoading: true });
@@ -63,13 +67,18 @@ export class App extends Component {
   }
 
   onFormSubmit = value => {
-    this.setState({
-      searchQuery: value,
-      searchCards: [],
-      isLoading: false,
-      error: null,
-      page: 1,
-    });
+    if (value === this.state.searchQuery) {
+      toast.warning('Please, enter new search query and try again.');
+      return;
+    } else {
+      this.setState({
+        searchQuery: value,
+        searchCards: [],
+        isLoading: false,
+        error: null,
+        page: 1,
+      });
+    }
   };
   LoadMore = () => {
     this.setState(prevState => ({

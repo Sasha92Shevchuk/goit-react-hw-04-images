@@ -9,8 +9,10 @@ class ImageGalleryItem extends Component {
   openModal = () => {
     this.setState({ isModalOpen: true });
   };
-  closeModal = () => {
-    this.setState({ isModalOpen: false });
+  closeModal = e => {
+    if (e.currentTarget === e.target) {
+      this.setState({ isModalOpen: false });
+    }
   };
   render() {
     const { isModalOpen } = this.state;
