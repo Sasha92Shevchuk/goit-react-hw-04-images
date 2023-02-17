@@ -3,7 +3,8 @@ import Searchbar from './Searchbar';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import ImageGallery from './ImageGallery';
-import * as instanceAPI from 'services/api';
+// import * as instanceAPI from 'services/api';
+import { getImages, PER_PAGE } from '../services/api';
 import Button from 'components/Button';
 import Loader from 'components/Loader';
 import { Box } from './App.styled';
@@ -23,10 +24,7 @@ export function App() {
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        const { hits, totalHits } = await instanceAPI.getImages(
-          searchQuery,
-          page
-        );
+        const { hits, totalHits } = await getImages(searchQuery, page);
         if (totalHits === 0) {
           toast.warning(
             'Sorry, there are no images matching your search query. Please try again.'
@@ -35,15 +33,13 @@ export function App() {
         if (totalHits > 0 && page === 1) {
           toast.success(`Hooray! We found ${totalHits} images.`);
         }
-        if (totalHits > 0 && totalHits === searchCards.length + hits.length) {
+        if (totalHits > 0 && totalHits <= page * PER_PAGE) {
           toast.info(
             `We're sorry, but you've reached the end of search results.`
           );
         }
         setSearchCards(prevState => [...prevState, ...hits]);
-        setIsVisible(
-          1 < Math.ceil(totalHits / (searchCards.length + hits.length))
-        );
+        setIsVisible(1 < Math.ceil(totalHits / (page * PER_PAGE)));
       } catch (error) {
         setError(error);
       } finally {
@@ -86,5 +82,3 @@ export function App() {
     </Box>
   );
 }
-
-// failed deploy without description
